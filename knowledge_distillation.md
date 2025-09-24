@@ -74,13 +74,14 @@ $$
 L_{\mathrm{CE}} = \mathrm{CrossEntropy}(y, \mathrm{Softmax}(z_s))
 $$
 
-3. **Total Loss**:
+3. **Total loss**:
 
 $$
 L_{\text{total}} = \alpha \cdot L_{\mathrm{CE}} + (1 - \alpha) \cdot L_{\mathrm{KD}}
 $$
 
           Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
+
 
 
 
