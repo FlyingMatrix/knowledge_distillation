@@ -80,7 +80,8 @@ $$
 L_{\text{total}} = \alpha \cdot L_{\mathrm{CE}} + (1 - \alpha) \cdot L_{\mathrm{KD}}
 $$
 
-Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
+          Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
+
 
 
 
