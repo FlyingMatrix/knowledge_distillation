@@ -34,11 +34,11 @@ In knowledge distillation, we want the **student model** to learn from both:
 
 Let:
 
-- `z_t` = logits from teacher model
+- $z_t$ = logits from teacher model
 
-- `z_s` = logits from student model
+- $z_s$ = logits from student model
 
-- `T` = temperature (a scalar > 1 used to soften logits)
+- $T$ = temperature (a scalar > 1 used to soften logits)
 
 The **softened probabilities** are:
 
@@ -77,15 +77,24 @@ $$
 3. **Total loss**:
 
 $$
-L_{\text{total}} = \alpha \cdot L_{\mathrm{CE}} + (1 - \alpha) \cdot L_{\mathrm{KD}}
+L = \alpha \cdot \mathrm{CrossEntropy}(y, \mathrm{Softmax}(z_s)) + (1 - \alpha) \cdot T^2 \cdot KL(p_t \parallel p_s)
 $$
 
           Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
 
+In **knowledge distillation**, the **temperature $T$** plays a crucial role in controlling how **soft** or **hard** the predicted probabilities are when distilling knowledge from a **teacher model** to a **student model**.
 
+During distillation, we modify the **softmax function** used to compute class probabilities:
 
+$$
+p_i = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}
+$$
 
+Where:
 
+- $z_i$ is the logit (raw output) for class $i$,
+
+- $T$ is the **temperature**.
 
 
 
