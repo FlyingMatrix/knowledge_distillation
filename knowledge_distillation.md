@@ -60,7 +60,7 @@ $$
 L_{\mathrm{KD}} = T^2 \cdot \mathrm{KL}(p_t \parallel p_s)
 $$
 
-          or:
+             or:
 
 $$
 L_{\mathrm{KD}} = T^2 \cdot \mathrm{CrossEntropy}(p_t, p_s)
@@ -175,3 +175,4 @@ In Knowledge Distillation:
 - The softened targets help the student learn **not just what is right**, but also **what is similar**.
 
 - After training, during **inference**, you use T=1 (standard softmax).
+
