@@ -160,11 +160,11 @@ Where:
 
 ###### ✅ 5. **Summary Table**:
 
-| Temperature \( T \) | Effect on Logits  | Effect on Softmax Output            |
+| Temperature \( $T$ \) | Effect on Logits  | Effect on Softmax Output            |
 | ------------------- | ----------------- | ----------------------------------- |
-| \( T > 1 \)         | Compresses logits | Softer, more uniform probabilities  |
-| \( T = 1 \)         | No change         | Normal softmax                      |
-| \( T < 1 \)         | Expands logits    | Sharper, more confident predictions |
+| \( $T > 1$ \)         | Compresses logits | Softer, more uniform probabilities  |
+| \( $T = 1$ \)         | No change         | Normal softmax                      |
+| \( $T < 1$ \)         | Expands logits    | Sharper, more confident predictions |
 
 ###### ✅ 6. **Typical Practice**:
 
@@ -174,7 +174,7 @@ In Knowledge Distillation:
 
 - The softened targets help the student learn **not just what is right**, but also **what is similar**.
 
-- After training, during **inference**, you use T=1 (standard softmax).
+- After training, during **inference**, you use $T=1$ (standard softmax).
 
 #### 📌 General PyTorch Knowledge Distillation Loss Function
 
@@ -206,4 +206,5 @@ class DistillationLoss(nn.Module):
         # Total loss
         return alpha * kd_loss + (1. - alpha) * ce_loss
 ```
+
 
