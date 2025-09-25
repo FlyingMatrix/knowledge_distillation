@@ -54,7 +54,7 @@ We define the total loss as a weighted sum of two losses:
    
    - This measures how well the student mimics the teacher.
    
-   - Use **KL divergence** or **cross-entropy**:
+   - Use **KL divergence** (see 4. in this section) or **cross-entropy**:
 
 $$
 L_{\mathrm{KD}} = T^2 \cdot \mathrm{KL}(p_t \parallel p_s)
@@ -82,6 +82,42 @@ $$
 
           Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
 
+4. **KL divergence**:
+
+        **Kullback–Leibler (KL) divergence** is a measure from information theory that         quantifies how one probability distribution is different from a second, reference         probability distribution.
+
+        For discrete probability distributions P and Q defined over the same support:
+
+$$
+D_{KL}(P \parallel Q) = \sum_x P(x) \log\left(\frac{P(x)}{Q(x)}\right)
+$$
+
+        For continuous distributions:
+
+$$
+D_{KL}(P \parallel Q) = \int_{-\infty}^{\infty} p(x) \log\left(\frac{p(x)}{q(x)}\right) \, dx
+$$
+
+        Specifically, for the KL divergence between two **normal distributions**:
+
+$$
+P(x) = \mathcal{N}(\mu_1, \sigma_1^2), \quad Q(x) = \mathcal{N}(\mu_2, \sigma_2^2)
+$$
+
+        Then the KL divergence from P to Q is:
+
+$$
+D_{KL}(P \parallel Q) = \log\left(\frac{\sigma_2}{\sigma_1}\right) + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}
+$$
+
+Where:
+
+- $P$: The true distribution (often called the "prior" or "real" distribution)
+
+- $Q$: The approximation or "guessed" distribution
+
+#### Effects of Temperature
+
 In **knowledge distillation**, the **temperature $T$** plays a crucial role in controlling how **soft** or **hard** the predicted probabilities are when distilling knowledge from a **teacher model** to a **student model**.
 
 During distillation, we modify the **softmax function** used to compute class probabilities:
@@ -96,6 +132,48 @@ Where:
 
 - $T$ is the **temperature**.
 
+###### ✅ 1. **When T=1**:
 
+- You get the standard softmax distribution.
+
+- Probabilities are sharp: typically, one class has high probability, others are near zero.
+
+###### ✅ 2. **When T>1**:
+
+- The output probabilities become **softer** (more uniform).
+
+- Higher T means **more smoothed** distributions.
+
+- This exposes **dark knowledge**: relative similarities between classes learned by the teacher.
+
+###### ✅ 3. **When T→∞**:
+
+- All classes tend to have **equal** probability → total smoothing.
+
+- Too high T may make the signal too weak for the student to learn useful differences.
+
+###### ✅ 4. **When T<1**:
+
+- The output becomes **sharper**, approaching a **one-hot** vector.
+
+- Less softening → fewer insights into class relationships.
+
+###### ✅ 5. **Summary Table**:
+
+| Temperature \( T \) | Effect on Logits  | Effect on Softmax Output            |
+| ------------------- | ----------------- | ----------------------------------- |
+| \( T > 1 \)         | Compresses logits | Softer, more uniform probabilities  |
+| \( T = 1 \)         | No change         | Normal softmax                      |
+| \( T < 1 \)         | Expands logits    | Sharper, more confident predictions |
+
+###### ✅ 6. **Typical Practice**:
+
+In Knowledge Distillation:
+
+- You use a high temperature (e.g., $T∈[2,5]$) on both teacher and student.
+
+- The softened targets help the student learn **not just what is right**, but also **what is similar**.
+
+- After training, during **inference**, you use T=1 (standard softmax).
 
 
