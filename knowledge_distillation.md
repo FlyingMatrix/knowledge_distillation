@@ -1,20 +1,20 @@
 ## Knowledge Distillation
 
-#### Definition
+📌#### Definition
 
 Knowledge distillation is a machine learning technique where a smaller, simpler model (called the student) is trained to mimic a larger, more complex model (called the teacher). The goal is to compress knowledge from the teacher into the student, making the student model faster and lighter while retaining high performance.
 
-#### Core Idea
+📌#### Core Idea
 
 Instead of just training the student on the original dataset with hard labels (0 or 1 for classification), it is trained on soft labels — the output probabilities from the teacher model.
 
-#### Why Use Knowledge Distillation?
+📌#### Why Use Knowledge Distillation?
 
 1. Model compression: Reduce size and inference time.
 2. Deployment efficiency: Useful for deploying models to resource-constrained environments (mobile, embedded, etc.).
 3. Better generalization: Student can sometimes generalize better than a small model trained directly on data.
 
-#### How It Works
+📌#### How It Works
 
 1. Train the Teacher Model: A large model is trained on the original data.
 2. Generate Soft Targets: Pass data through the teacher to get output logits/probabilities.
@@ -22,7 +22,7 @@ Instead of just training the student on the original dataset with hard labels (0
    - Use both the soft targets from the teacher and the hard labels from the data.
    - Use a combined loss function.
 
-#### Knowldege Distillation Loss Function - Mathematical Explanation
+📌#### Knowldege Distillation Loss Function - Mathematical Explanation
 
 In knowledge distillation, we want the **student model** to learn from both:
 
@@ -116,7 +116,7 @@ Where:
 
 - $Q$: The approximation or "guessed" distribution
 
-#### Effects of Temperature
+📌#### Effects of Temperature
 
 In **knowledge distillation**, the **temperature $T$** plays a crucial role in controlling how **soft** or **hard** the predicted probabilities are when distilling knowledge from a **teacher model** to a **student model**.
 
@@ -175,4 +175,5 @@ In Knowledge Distillation:
 - The softened targets help the student learn **not just what is right**, but also **what is similar**.
 
 - After training, during **inference**, you use T=1 (standard softmax).
+
 
