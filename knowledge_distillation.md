@@ -84,9 +84,9 @@ $$
 
 4. **KL divergence**:
 
-        **Kullback–Leibler (KL) divergence** is a measure from information theory that         quantifies how one probability distribution is different from a second, reference         probability distribution.
+        **Kullback–Leibler (KL) divergence** is a measure from information theory that quantifies how one probability distribution is different from a second, reference probability distribution.
 
-        For discrete probability distributions P and Q defined over the same support:
+        For discrete probability distributions $P$ and $Q$ defined over the same support:
 
 $$
 D_{KL}(P \parallel Q) = \sum_x P(x) \log\left(\frac{P(x)}{Q(x)}\right)
@@ -175,5 +175,3 @@ In Knowledge Distillation:
 - The softened targets help the student learn **not just what is right**, but also **what is similar**.
 
 - After training, during **inference**, you use T=1 (standard softmax).
-
-
