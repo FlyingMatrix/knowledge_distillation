@@ -77,7 +77,7 @@ $$
 3. **Total loss**:
 
 $$
-L = \alpha \cdot \mathrm{CrossEntropy}(y, \mathrm{Softmax}(z_s)) + (1 - \alpha) \cdot T^2 \cdot KL(p_t \parallel p_s)
+L =  \alpha \cdot T^2 \cdot KL(p_t \parallel p_s) + (1 - \alpha) \cdot \mathrm{CrossEntropy}(y, \mathrm{Softmax}(z_s))
 $$
 
           Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
@@ -176,5 +176,33 @@ In Knowledge Distillation:
 
 - After training, during **inference**, you use T=1 (standard softmax).
 
+#### 📌 General PyTorch Knowledge Distillation Loss Function
 
+```
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class DistillationLoss(nn.Module):
+    def __init__(self, temperature=2.0, alpha=0.5):
+        super(DistillationLoss, self).__init__()
+        self.temperature = temperature
+        self.alpha = alpha
+        self.ce_loss = nn.CrossEntropyLoss()
+
+    def forward(self, student_logits, teacher_logits, true_labels):
+        T = self.temperature
+        alpha = self.alpha
+
+        # Soft targets: distillation loss
+        soft_teacher = F.log_softmax(teacher_logits / T, dim=1)
+        soft_student = F.log_softmax(student_logits / T, dim=1)
+        kd_loss = F.kl_div(soft_student, soft_teacher, reduction='batchmean') * (T * T)
+
+        # Hard targets: standard classification loss
+        ce_loss = self.ce_loss(student_logits, true_labels)
+
+        # Total loss
+        return alpha * kd_loss + (1. - alpha) * ce_loss
+```
 
