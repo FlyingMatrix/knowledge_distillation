@@ -78,6 +78,5 @@
 
 4. **For example, if I would like to train a DistilBERT model (student) via knowledge distillation from a BERT model (teacher), which tokenizer should I choose for the dataset?**
 
-       Knowledge distillation involves the student (DistilBERT) learning from the teacher's        outputs. If the tokenization is different, the input tokens won't align, and the               student can't learn effectively. For this reason, always **use the same tokenizer as        the teacher model (BERT tokenizer)** and this guarantees smooth transfer of        learned knowledge and ensures same vocabulary, same token splitting, same input        IDs and attention masks.
-
+   Knowledge distillation involves the student (DistilBERT) learning from the teacher's outputs. If the tokenization is different, the input tokens won't align, and the student can't learn effectively. For this reason, always **use the same tokenizer as the teacher model (BERT tokenizer)** and this guarantees smooth transfer of learned knowledge and ensures same vocabulary, same token splitting, same input IDs and attention masks.
 
