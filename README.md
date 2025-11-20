@@ -30,7 +30,7 @@ In knowledge distillation, we want the **student model** to learn from both:
 
 - The **soft predictions** of the teacher model (i.e., the probability distribution over classes).
 
-#### Step 1: Temperature Scaling
+#### ➡️ Step 1: Temperature Scaling
 
 Let:
 
@@ -46,7 +46,7 @@ $$
 {p_t} = \mathrm{Softmax}\left(\frac{z_t}{T}\right), \quad {p_s} = \mathrm{Softmax}\left(\frac{z_s}{T}\right)
 $$
 
-#### Step 2: Loss Components
+#### ➡️ Step 2: Loss Components
 
 We define the total loss as a weighted sum of two losses:
 
