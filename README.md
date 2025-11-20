@@ -1,20 +1,20 @@
-## Knowledge Distillation
+# Knowledge Distillation
 
-#### 📌 Definition
+### 📦 Definition
 
 Knowledge distillation is a machine learning technique where a smaller, simpler model (called the student) is trained to mimic a larger, more complex model (called the teacher). The goal is to compress knowledge from the teacher into the student, making the student model faster and lighter while retaining high performance.
 
-#### 📌 Core Idea
+### 🎯 Core Idea
 
 Instead of just training the student on the original dataset with hard labels (0 or 1 for classification), it is trained on soft labels — the output probabilities from the teacher model.
 
-#### 📌 Why Use Knowledge Distillation?
+### 🔍 Why Use Knowledge Distillation?
 
 1. Model compression: Reduce size and inference time.
 2. Deployment efficiency: Useful for deploying models to resource-constrained environments (mobile, embedded, etc.).
 3. Better generalization: Student can sometimes generalize better than a small model trained directly on data.
 
-#### 📌 How It Works
+### 🛠️ How It Works
 
 1. Train the Teacher Model: A large model is trained on the original data.
 2. Generate Soft Targets: Pass data through the teacher to get output logits/probabilities.
@@ -22,7 +22,7 @@ Instead of just training the student on the original dataset with hard labels (0
    - Use both the soft targets from the teacher and the hard labels from the data.
    - Use a combined loss function.
 
-#### 📌 Knowldege Distillation Loss Function - Mathematical Explanation
+### 🚀 Knowldege Distillation Loss Function - Mathematical Explanation
 
 In knowledge distillation, we want the **student model** to learn from both:
 
@@ -30,7 +30,7 @@ In knowledge distillation, we want the **student model** to learn from both:
 
 - The **soft predictions** of the teacher model (i.e., the probability distribution over classes).
 
-##### Step 1: Temperature Scaling
+#### Step 1: Temperature Scaling
 
 Let:
 
@@ -46,7 +46,7 @@ $$
 {p_t} = \mathrm{Softmax}\left(\frac{z_t}{T}\right), \quad {p_s} = \mathrm{Softmax}\left(\frac{z_s}{T}\right)
 $$
 
-##### Step 2: Loss Components
+#### Step 2: Loss Components
 
 We define the total loss as a weighted sum of two losses:
 
@@ -116,7 +116,7 @@ Where:
 
 - $Q$: The approximation or "guessed" distribution
 
-#### 📌 Effects of Temperature
+### 🏗️ Effects of Temperature
 
 In **knowledge distillation**, the **temperature $T$** plays a crucial role in controlling how **soft** or **hard** the predicted probabilities are when distilling knowledge from a **teacher model** to a **student model**.
 
@@ -132,13 +132,13 @@ Where:
 
 - $T$ is the **temperature**.
 
-###### ✅ 1. **When T=1**:
+##### ✅ 1. **When T=1**:
 
 - You get the standard softmax distribution.
 
 - Probabilities are sharp: typically, one class has high probability, others are near zero.
 
-###### ✅ 2. **When T>1**:
+##### ✅ 2. **When T>1**:
 
 - The output probabilities become **softer** (more uniform).
 
@@ -146,19 +146,19 @@ Where:
 
 - This exposes **dark knowledge**: relative similarities between classes learned by the teacher.
 
-###### ✅ 3. **When T→∞**:
+##### ✅ 3. **When T→∞**:
 
 - All classes tend to have **equal** probability → total smoothing.
 
 - Too high T may make the signal too weak for the student to learn useful differences.
 
-###### ✅ 4. **When T<1**:
+##### ✅ 4. **When T<1**:
 
 - The output becomes **sharper**, approaching a **one-hot** vector.
 
 - Less softening → fewer insights into class relationships.
 
-###### ✅ 5. **Summary Table**:
+##### ✅ 5. **Summary Table**:
 
 | Temperature \( $T$ \) | Effect on Logits  | Effect on Softmax Output            |
 | --------------------- | ----------------- | ----------------------------------- |
@@ -166,7 +166,7 @@ Where:
 | \( $T = 1$ \)         | No change         | Normal softmax                      |
 | \( $T < 1$ \)         | Expands logits    | Sharper, more confident predictions |
 
-###### ✅ 6. **Typical Practice**:
+##### ✅ 6. **Typical Practice**:
 
 In Knowledge Distillation:
 
@@ -176,7 +176,7 @@ In Knowledge Distillation:
 
 - After training, during **inference**, you use $T=1$ (standard softmax).
 
-#### 📌 General PyTorch Knowledge Distillation Loss Function
+### 💻 General PyTorch Knowledge Distillation Loss Function
 
 ```
 import torch
@@ -207,7 +207,7 @@ class DistillationLoss(nn.Module):
         return alpha * kd_loss + (1. - alpha) * ce_loss
 ```
 
-#### 📌 Frequently Asked Questions (FAQ)
+### 📝 Frequently Asked Questions (FAQ)
 
 1. **Why Do We Need Knowledge Distillation?**
    
