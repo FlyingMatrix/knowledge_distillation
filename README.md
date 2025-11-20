@@ -128,9 +128,9 @@ $$
 
 Where:
 
-- $z_i$ is the logit (raw output) for class $i$,
+- $z_i$ is the logit (raw output) for class $i$
 
-- $T$ is the **temperature**.
+- $T$ is the **temperature**
 
 ##### ✅ 1. **When T=1**:
 
