@@ -80,11 +80,11 @@ $$
 L =  \alpha \cdot T^2 \cdot KL(p_t \parallel p_s) + (1 - \alpha) \cdot \mathrm{CrossEntropy}(y, \mathrm{Softmax}(z_s))
 $$
 
-          Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
+            Where $α∈[0,1]$ controls how much weight to give to the hard vs soft loss.
 
 4. **KL divergence**:
 
-        **Kullback–Leibler (KL) divergence** is a measure from information theory that quantifies how one probability distribution is different from a second, reference probability distribution.
+        **Kullback–Leibler (KL) divergence** is a measure from information theory that         quantifies how one probability distribution is different from a second, reference         probability distribution.
 
         For discrete probability distributions $P$ and $Q$ defined over the same support:
 
@@ -110,11 +110,11 @@ $$
 D_{KL}(P \parallel Q) = \log\left(\frac{\sigma_2}{\sigma_1}\right) + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}
 $$
 
-Where:
+        Where:
 
-- $P$: The true distribution (often called the "prior" or "real" distribution)
+            $P$: The true distribution (often called the "prior" or "real" distribution)
 
-- $Q$: The approximation or "guessed" distribution
+            $Q$: The approximation or "guessed" distribution
 
 ### 🏗️ Effects of Temperature
 
