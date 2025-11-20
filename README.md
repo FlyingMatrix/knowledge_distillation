@@ -110,11 +110,7 @@ $$
 D_{KL}(P \parallel Q) = \log\left(\frac{\sigma_2}{\sigma_1}\right) + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}
 $$
 
-Where:
-
-- $P$: The true distribution (often called the "prior" or "real" distribution)
-
-- $Q$: The approximation or "guessed" distribution 
+        Where $P$ is the true distribution (often called the "prior" or "real" distribution), and $Q$ is the approximation or "guessed" distribution. 
 
 ### 🏗️ Effects of Temperature
 
